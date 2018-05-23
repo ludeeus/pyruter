@@ -16,11 +16,11 @@ class Ruter:
         """Get departure info from stopid."""
         fetchurl = self.BASE_URL + str(stopid)
         try:
-            departureRequest = requests.get(fetchurl, timeout=10).json()[0]
-            departureResponse = departureRequest['MonitoredVehicleJourney']
+            departureRequest = requests.get(fetchurl, timeout=5).json()[0]
         except:
             stopInfo = False
         else:
+            departureResponse = departureRequest['MonitoredVehicleJourney']
             line = departureResponse['LineRef']
             destination = departureResponse['DestinationName']
             time = departureResponse['MonitoredCall']['ExpectedDepartureTime']
