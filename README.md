@@ -15,10 +15,11 @@ pip install pyruter
 from pyruter import Ruter
 
 stopid = 2190400
+destination = 'Sandvika' #optional
 ruter = Ruter()
 
 #Get deperture information:
-result = ruter.getDepartureInfo(stopid)
+result = ruter.getDepartureInfo(stopid, destination)
 
 #Print the result:
 print(result)
