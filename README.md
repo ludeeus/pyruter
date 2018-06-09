@@ -1,3 +1,5 @@
+# Archived: Moved to GitLab https://gitlab.com/ludeeus/pyruter
+
 # pyruter - A module to get information about the next departure from a stop.
 
 #### Notes
