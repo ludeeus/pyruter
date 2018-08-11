@@ -1,18 +1,22 @@
-# Archived: Moved to GitLab https://gitlab.com/ludeeus/pyruter
+# pyruter
 
-# pyruter - A module to get information about the next departure from a stop.
+_A module to get information about the next departure from a stop._
 
-#### Notes
+## Notes
+
 This has been tested with python 3.6  
 This module uses these external libararies:
+
 - requests
 
-#### Install
+## Install
+
 ```bash
 pip install pyruter
 ```
 
-#### Usage:
+## Sample usage
+
 ```python
 from pyruter import Ruter
 
@@ -21,7 +25,7 @@ destination = 'Sandvika' #optional
 ruter = Ruter()
 
 #Get deperture information:
-result = ruter.getDepartureInfo(stopid, destination)
+result = ruter.get_departure_info(stopid, destination)
 
 #Print the result:
 print(result)
