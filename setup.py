@@ -9,6 +9,7 @@ setuptools.setup(
     author_email="joasoe@gmail.com",
     description="A module to get information about the next departure from a stop..",
     long_description=LONG,
+    install_requires=['requests'],
     long_description_content_type="text/markdown",
     url="https://github.com/ludeeus/pyruter",
     packages=setuptools.find_packages(),
