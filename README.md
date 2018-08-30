@@ -1,13 +1,8 @@
 # pyruter
 
+[![Build Status](https://travis-ci.org/ludeeus/pyruter.svg?branch=master)](https://travis-ci.org/ludeeus/pyruter)
+
 _A module to get information about the next departure from a stop._
-
-## Notes
-
-This has been tested with python 3.6  
-This module uses these external libararies:
-
-- requests
 
 ## Install
 
