@@ -20,7 +20,7 @@ class Ruter:
         fetchurl = self.BASE_URL + str(stopid)
         try:
             response = requests.get(fetchurl, timeout=8).json()
-        except:
+        except ConnectionError:
             stop_info.append({"success": False})
         else:
             stop_info.append({"success": True})
@@ -43,7 +43,7 @@ class Ruter:
                     stop_info.append({"time": time,
                                       "line": line,
                                       "destination": destinationname})
-                except:
+                except IndexError:
                     stop_info.append({"success": False})
         return stop_info
 
