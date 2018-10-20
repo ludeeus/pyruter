@@ -1,9 +1,11 @@
 """
 A module to get information about the next departure from a stop.
+
 This code is released under the terms of the MIT license. See the LICENSE
 file for more details.
 """
 import requests
+
 
 class Ruter:
     """This class is used to get departure information from Ruter."""
@@ -11,30 +13,44 @@ class Ruter:
 
     def __init__(self):
         """Initialize"""
-        self.stop_info = None
 
     def get_departure_info(self, stopid, destination=None):
         """Get departure info from stopid."""
+        stop_info = []
         fetchurl = self.BASE_URL + str(stopid)
         try:
-            departure_request = requests.get(fetchurl, timeout=2).json()
+            response = requests.get(fetchurl, timeout=8).json()
         except:
-            stop_info = None
+            stop_info.append({"success": False})
         else:
-            if not destination:
-                departure_response = departure_request[0]['MonitoredVehicleJourney']
-            else:
-                count = 0
-                stop = 0
-                while stop != 1:
-                    departure_response = departure_request[count]['MonitoredVehicleJourney']
-                    if departure_response['DestinationName'] == destination:
-                        departure_response = departure_request[count]['MonitoredVehicleJourney']
-                        stop = 1
+            stop_info.append({"success": True})
+            for entries in response:
+                try:
+                    data = entries['MonitoredVehicleJourney']
+                    if destination is not None:
+                        if data['DestinationName'] == destination:
+                            data = entries['MonitoredVehicleJourney']
+                            line = data['LineRef']
+                            destinationname = data['DestinationName']
+                            monitored = data['MonitoredCall']
+                            time = monitored['ExpectedDepartureTime']
                     else:
-                        count = count + 1
-            line = departure_response['LineRef']
-            destination = departure_response['DestinationName']
-            time = departure_response['MonitoredCall']['ExpectedDepartureTime']
-            stop_info = [time, line, destination]
+                        data = entries['MonitoredVehicleJourney']
+                        line = data['LineRef']
+                        destinationname = data['DestinationName']
+                        monitored = data['MonitoredCall']
+                        time = monitored['ExpectedDepartureTime']
+                    stop_info.append({"time": time,
+                                      "line": line,
+                                      "destination": destinationname})
+                except:
+                    stop_info.append({"success": False})
         return stop_info
+
+
+def self_test():
+    """Run a test of the functions in this module."""
+    stopid = 2190255
+    destination = 'Oslo bussterminal'
+    print(Ruter().get_departure_info(stopid))
+    print(Ruter().get_departure_info(stopid, destination))

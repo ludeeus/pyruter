@@ -1,13 +1,15 @@
-"""Setup"""
+"""Setup."""
 import setuptools
 with open("README.md", "r") as fh:
     LONG = fh.read()
 setuptools.setup(
     name="pyruter",
-    version="0.0.9",
+    version="0.1.0",
     author="Joakim Sorensen",
-    author_email="joasoe@gmail.com",
-    description="A module to get information about the next departure from a stop..",
+    author_email="ludeeus@gmail.com",
+    description="""
+    A module to get information about the next departure from a stop..
+    """,
     long_description=LONG,
     install_requires=['requests'],
     long_description_content_type="text/markdown",

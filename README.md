@@ -16,7 +16,7 @@ pip install pyruter
 from pyruter import Ruter
 
 stopid = 2190400
-destination = 'Sandvika' #optional
+destination = 'Drammen' #optional
 ruter = Ruter()
 
 #Get deperture information:
