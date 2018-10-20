@@ -29,15 +29,18 @@ def get_departure_info(stopid, destination=None):
                         destinationname = data['DestinationName']
                         monitored = data['MonitoredCall']
                         time = monitored['ExpectedDepartureTime']
+                        stop_info.append({"time": time,
+                                          "line": line,
+                                          "destination": destinationname})
                 else:
                     data = entries['MonitoredVehicleJourney']
                     line = data['LineRef']
                     destinationname = data['DestinationName']
                     monitored = data['MonitoredCall']
                     time = monitored['ExpectedDepartureTime']
-                stop_info.append({"time": time,
-                                  "line": line,
-                                  "destination": destinationname})
+                    stop_info.append({"time": time,
+                                      "line": line,
+                                      "destination": destinationname})
             except IndexError:
                 stop_info.append({"success": False})
             except UnboundLocalError:
