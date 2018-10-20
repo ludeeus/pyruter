@@ -17,6 +17,8 @@ def get_departure_info(stopid, destination=None):
         response = requests.get(fetchurl, timeout=8).json()
     except ConnectionError:
         stop_info.append({"success": False})
+    except requests.exceptions.ReadTimeout:
+        stop_info.append({"success": False})
     else:
         stop_info.append({"success": True})
         for entries in response:
