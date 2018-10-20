@@ -40,6 +40,8 @@ def get_departure_info(stopid, destination=None):
                                   "destination": destinationname})
             except IndexError:
                 stop_info.append({"success": False})
+            except UnboundLocalError:
+                stop_info.append({"success": False})
     return stop_info
 
 
