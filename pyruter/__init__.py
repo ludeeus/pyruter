@@ -6,52 +6,46 @@ file for more details.
 """
 import requests
 
+BASE_URL = 'http://reisapi.ruter.no/StopVisit/GetDepartures/'
 
-class Ruter:
-    """This class is used to get departure information from Ruter."""
 
-    BASE_URL = 'http://reisapi.ruter.no/StopVisit/GetDepartures/'
-
-    def __init__(self):
-        """Initialize."""
-
-    def get_departure_info(self, stopid, destination=None):
-        """Get departure info from stopid."""
-        stop_info = []
-        fetchurl = self.BASE_URL + str(stopid)
-        try:
-            response = requests.get(fetchurl, timeout=8).json()
-        except ConnectionError:
-            stop_info.append({"success": False})
-        else:
-            stop_info.append({"success": True})
-            for entries in response:
-                try:
-                    data = entries['MonitoredVehicleJourney']
-                    if destination is not None:
-                        if data['DestinationName'] == destination:
-                            data = entries['MonitoredVehicleJourney']
-                            line = data['LineRef']
-                            destinationname = data['DestinationName']
-                            monitored = data['MonitoredCall']
-                            time = monitored['ExpectedDepartureTime']
-                    else:
+def get_departure_info(stopid, destination=None):
+    """Get departure info from stopid."""
+    stop_info = []
+    fetchurl = BASE_URL + str(stopid)
+    try:
+        response = requests.get(fetchurl, timeout=8).json()
+    except ConnectionError:
+        stop_info.append({"success": False})
+    else:
+        stop_info.append({"success": True})
+        for entries in response:
+            try:
+                data = entries['MonitoredVehicleJourney']
+                if destination is not None:
+                    if data['DestinationName'] == destination:
                         data = entries['MonitoredVehicleJourney']
                         line = data['LineRef']
                         destinationname = data['DestinationName']
                         monitored = data['MonitoredCall']
                         time = monitored['ExpectedDepartureTime']
-                    stop_info.append({"time": time,
-                                      "line": line,
-                                      "destination": destinationname})
-                except IndexError:
-                    stop_info.append({"success": False})
-        return stop_info
+                else:
+                    data = entries['MonitoredVehicleJourney']
+                    line = data['LineRef']
+                    destinationname = data['DestinationName']
+                    monitored = data['MonitoredCall']
+                    time = monitored['ExpectedDepartureTime']
+                stop_info.append({"time": time,
+                                  "line": line,
+                                  "destination": destinationname})
+            except IndexError:
+                stop_info.append({"success": False})
+    return stop_info
 
 
 def self_test():
     """Run a test of the functions in this module."""
     stopid = 2190255
     destination = 'Oslo bussterminal'
-    print(Ruter().get_departure_info(stopid))
-    print(Ruter().get_departure_info(stopid, destination))
+    print(get_departure_info(stopid))
+    print(get_departure_info(stopid, destination))

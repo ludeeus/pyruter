@@ -13,14 +13,13 @@ pip install pyruter
 ## Sample usage
 
 ```python
-from pyruter import Ruter
+import pyruter
 
 stopid = 2190400
 destination = 'Drammen' #optional
-ruter = Ruter()
 
 #Get deperture information:
-result = ruter.get_departure_info(stopid, destination)
+result = pyruter.get_departure_info(stopid, destination)
 
 #Print the result:
 print(result)
