@@ -9,10 +9,11 @@ import requests
 
 class Ruter:
     """This class is used to get departure information from Ruter."""
+
     BASE_URL = 'http://reisapi.ruter.no/StopVisit/GetDepartures/'
 
     def __init__(self):
-        """Initialize"""
+        """Initialize."""
 
     def get_departure_info(self, stopid, destination=None):
         """Get departure info from stopid."""
