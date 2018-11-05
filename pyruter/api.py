@@ -8,7 +8,7 @@ from .common import BASE_URL, LOGGER
 from .error import RuterError
 
 
-class Departures(object):
+class Departures():
     """A class to get departure information."""
 
     def __init__(self, loop, stopid, destination=None):

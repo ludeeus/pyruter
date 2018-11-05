@@ -10,7 +10,7 @@ LOGGER = logging.getLogger(__name__)
 BASE_URL = 'http://reisapi.ruter.no'
 
 
-class CommonFunctions(object):
+class CommonFunctions():
     """A class for common functions."""
 
     def __init__(self, loop):
@@ -18,7 +18,7 @@ class CommonFunctions(object):
         self.loop = loop
 
     async def api_call(self, endpoint):
-        """Generic api call."""
+        """A Generic api call."""
         data = None
         try:
             async with async_timeout.timeout(5, loop=self.loop):
