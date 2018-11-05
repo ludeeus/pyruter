@@ -18,7 +18,6 @@ class Departures(object):
         self.destination = destination
         self._departures = []
 
-
     async def get_departures(self):
         """Get departure info from stopid."""
         from .common import CommonFunctions
