@@ -1,8 +1,6 @@
-# pyruter
+# pyruter [![Build Status](https://travis-ci.com/ludeeus/pyruter.svg?branch=master)](https://travis-ci.com/ludeeus/pyruter) [![PyPI version](https://badge.fury.io/py/pyruter.svg)](https://badge.fury.io/py/pyruter)
 
-[![Build Status](https://travis-ci.org/ludeeus/pyruter.svg?branch=master)](https://travis-ci.org/ludeeus/pyruter)
-
-_A module to get information about the next departure from a stop._
+_Python package to interact with the local API of Google Home devices._
 
 ## Install
 
@@ -10,17 +8,24 @@ _A module to get information about the next departure from a stop._
 pip install pyruter
 ```
 
-## Sample usage
+### Example usage
 
 ```python
-import pyruter
+"""Example usage of pyruter."""
+import asyncio
+from pyruter.api import Departures
 
-stopid = 2190400
-destination = 'Drammen' #optional
+async def test_pyruter():
+    """Example usage of pyruter."""
+    stopid = 2190400
+    destination = 'Drammen'
+    data = Departures(LOOP, stopid, destination)
+    await data.get_departures()
 
-#Get deperture information:
-result = pyruter.get_departure_info(stopid, destination)
+    print("Departures:", data.departures)
 
-#Print the result:
-print(result)
+LOOP = asyncio.get_event_loop()
+LOOP.run_until_complete(test_pyruter())
 ```
+
+**NB!: The `destination` has to be the final destination, and not where you are hopping off.

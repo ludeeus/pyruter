@@ -2,7 +2,6 @@ language: python
 stages:
   - linting
   - install
-  - run
   - deploy
 
 jobs:
@@ -42,50 +41,6 @@ jobs:
       script:
         - python setup.py install
 
-    # Run functions
-    - stage: run
-      install: pip install -U pip setuptools wheel
-      name: "Run with Python 2.7"
-      python: "2.7"
-      script:
-        - python setup.py install
-        - python -c"import pyruter; print(pyruter.self_test())"
-    - stage: run
-      install: pip install -U pip setuptools wheel
-      name: "Run with Python 3.4"
-      python: "3.4"
-      script:
-        - python setup.py install
-        - python -c"import pyruter; print(pyruter.self_test())"
-    - stage: run
-      install: pip install -U pip setuptools wheel
-      name: "Run with Python 3.5"
-      python: "3.5"
-      script:
-        - python setup.py install
-        - python -c"import pyruter; print(pyruter.self_test())"
-    - stage: run
-      install: pip install -U pip setuptools wheel
-      name: "Run with Python 3.6"
-      python: "3.6"
-      script:
-        - python setup.py install
-        - python -c"import pyruter; print(pyruter.self_test())"
-    - stage: run
-      install: pip install -U pip setuptools wheel
-      name: "Run with Python 3.6-dev"
-      python: "3.6-dev"
-      script:
-        - python setup.py install
-        - python -c"import pyruter; print(pyruter.self_test())"
-    - stage: run
-      install: pip install -U pip setuptools wheel
-      name: "Run with Python 3.7-dev"
-      python: "3.7-dev"
-      script:
-        - python setup.py install
-        - python -c"import pyruter; print(pyruter.self_test())"
-
     # Deploy to PyPi if all tests pass and change was done on master.
     - stage: deploy
       name: "Deploy to PyPi"
@@ -95,5 +50,5 @@ jobs:
         provider: pypi
         user: "$PYPIUSER"
         password: "$PYPIKEY"
-        #on:
-        #  tags: true
+        on:
+          tags: true
