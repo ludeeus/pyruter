@@ -4,7 +4,6 @@ A module to get information about the next departure from a stop.
 This code is released under the terms of the MIT license. See the LICENSE
 file for more details.
 """
-import dateutil.parser
 from .common import BASE_URL, LOGGER
 from .error import RuterError
 
@@ -37,8 +36,7 @@ class Departures():
                         destinationname = data['DestinationName']
                         monitored = data['MonitoredCall']
                         time = monitored['ExpectedDepartureTime']
-                        departure = dateutil.parser.parse(time)
-                        dest_time = departure.strftime("%H:%M")
+                        dest_time = time.split('T')[1].split('+')[0][:-3]
                         departures.append({"time": dest_time,
                                            "line": line,
                                            "destination": destinationname})
@@ -48,8 +46,7 @@ class Departures():
                     destinationname = data['DestinationName']
                     monitored = data['MonitoredCall']
                     time = monitored['ExpectedDepartureTime']
-                    departure = dateutil.parser.parse(time)
-                    dest_time = departure.strftime("%H:%M")
+                    dest_time = time.split('T')[1].split('+')[0][:-3]
                     departures.append({"time": dest_time,
                                        "line": line,
                                        "destination": destinationname})
