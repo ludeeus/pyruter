@@ -18,7 +18,7 @@ class CommonFunctions():
         self.loop = loop
 
     async def api_call(self, endpoint):
-        """Api call."""
+        """Call the API."""
         data = None
         try:
             async with async_timeout.timeout(5, loop=self.loop):
