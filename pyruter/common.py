@@ -8,6 +8,7 @@ from .error import RuterError
 
 LOGGER = logging.getLogger(__name__)
 BASE_URL = 'http://reisapi.ruter.no'
+HEADERS = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 
 class CommonFunctions():
@@ -23,7 +24,7 @@ class CommonFunctions():
         try:
             async with async_timeout.timeout(5, loop=self.loop):
                 async with aiohttp.ClientSession() as session:
-                    response = await session.get(endpoint)
+                    response = await session.get(endpoint, headers=HEADERS)
                     data = await response.json()
         except RuterError as error:
             LOGGER.error('Error connecting to Ruter, %s', error)
