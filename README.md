@@ -1,4 +1,4 @@
-# pyruter [![Build Status](https://travis-ci.com/ludeeus/pyruter.svg?branch=master)](https://travis-ci.com/ludeeus/pyruter) [![PyPI version](https://badge.fury.io/py/pyruter.svg)](https://badge.fury.io/py/pyruter)
+# pyruter [![Build Status](https://travis-ci.org/ludeeus/pyruter.svg?branch=master)](https://travis-ci.org/ludeeus/pyruter) [![PyPI version](https://badge.fury.io/py/pyruter.svg)](https://badge.fury.io/py/pyruter)
 
 _Python package to interact with the local API of Google Home devices._
 
