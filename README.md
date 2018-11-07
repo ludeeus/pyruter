@@ -13,13 +13,15 @@ pip install pyruter
 ```python
 """Example usage of pyruter."""
 import asyncio
+import aiohttp
 from pyruter.api import Departures
 
 async def test_pyruter():
     """Example usage of pyruter."""
     stopid = 2190400
     destination = 'Drammen'
-    data = Departures(LOOP, stopid, destination)
+    custom_session = aiohttp.ClientSession()
+    data = Departures(LOOP, stopid, destination, custom_session)
     await data.get_departures()
 
     print("Departures:", data.departures)

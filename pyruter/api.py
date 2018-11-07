@@ -11,9 +11,10 @@ from .error import RuterError
 class Departures():
     """A class to get departure information."""
 
-    def __init__(self, loop, stopid, destination=None):
+    def __init__(self, loop, stopid, destination=None, session=None):
         """Initialize the class."""
         self.loop = loop
+        self.session = session
         self.stopid = stopid
         self.destination = destination
         self._departures = []
@@ -21,7 +22,7 @@ class Departures():
     async def get_departures(self):
         """Get departure info from stopid."""
         from .common import CommonFunctions
-        common = CommonFunctions(self.loop)
+        common = CommonFunctions(self.loop, self.session)
         departures = []
         endpoint = '{}/StopVisit/GetDepartures/{}'.format(BASE_URL,
                                                           str(self.stopid))
