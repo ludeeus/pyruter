@@ -1,13 +1,11 @@
 """Common attributes and functions."""
 import logging
-
+import asyncio
 import aiohttp
 import async_timeout
 
-from .error import RuterError
-
 LOGGER = logging.getLogger(__name__)
-BASE_URL = 'http://reisapi.ruter.no'
+BASE_URL = 'http://reisapi.ruter.no0'
 HEADERS = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 
@@ -28,8 +26,10 @@ class CommonFunctions():
             async with async_timeout.timeout(5, loop=self.loop):
                 response = await self.session.get(endpoint, headers=HEADERS)
                 data = await response.json()
-        except RuterError as error:
+        except aiohttp.ClientError as error:
             LOGGER.error('Error connecting to Ruter, %s', error)
+        except asyncio.TimeoutError as error:
+            LOGGER.debug('Timeout connecting to Ruter, %s', error)
         return data
 
     async def sort_data(self, data, sort_key, reverse=False):

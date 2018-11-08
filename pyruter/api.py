@@ -5,7 +5,6 @@ This code is released under the terms of the MIT license. See the LICENSE
 file for more details.
 """
 from .common import BASE_URL, LOGGER
-from .error import RuterError
 
 
 class Departures():
@@ -27,7 +26,7 @@ class Departures():
         endpoint = '{}/StopVisit/GetDepartures/{}'.format(BASE_URL,
                                                           str(self.stopid))
         data = await common.api_call(endpoint)
-        for entries in data:
+        for entries in data or []:
             try:
                 data = entries['MonitoredVehicleJourney']
                 if self.destination is not None:
@@ -51,7 +50,7 @@ class Departures():
                     departures.append({"time": dest_time,
                                        "line": line,
                                        "destination": destinationname})
-            except RuterError as error:
+            except (TypeError, KeyError, IndexError) as error:
                 LOGGER.error('Error connecting to Ruter, %s', error)
         self._departures = await common.sort_data(departures, 'time')
 
