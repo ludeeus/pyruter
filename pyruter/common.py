@@ -5,7 +5,7 @@ import aiohttp
 import async_timeout
 
 LOGGER = logging.getLogger(__name__)
-BASE_URL = 'http://reisapi.ruter.no0'
+BASE_URL = 'http://reisapi.ruter.no'
 HEADERS = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 
