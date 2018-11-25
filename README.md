@@ -8,6 +8,8 @@ _Python package to interact with the local API of Google Home devices._
 pip install pyruter
 ```
 
+This package also include a CLI tool, run `pyruter --help` to see what it can do.
+
 ### Example usage
 
 ```python
