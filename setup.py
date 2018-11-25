@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     LONG = fh.read()
 setuptools.setup(
     name="pyruter",
-    version="1.2.2",
+    version="1.2.3",
     author="Joakim Sorensen",
     author_email="ludeeus@gmail.com",
     description="",

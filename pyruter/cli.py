@@ -14,7 +14,7 @@ def commands():
 @commands.command()
 @click.option('--stop', '-S', type=int, default=None, required=1,
               help="Stop ID of the stop you want information from.")
-@click.option('--destination', '-D', type=str, default=None, required=1,
+@click.option('--destination', '-D', type=str, default=None,
               help="Name of final destination.")
 def departure(stop, destination):
     """Get departure information."""
