@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     LONG = fh.read()
 setuptools.setup(
     name="pyruter",
-    version="1.2.0",
+    version="1.2.1",
     author="Joakim Sorensen",
     author_email="ludeeus@gmail.com",
     description="",
@@ -21,7 +21,7 @@ setuptools.setup(
     ),
     entry_points={
         'console_scripts': [
-            'pyruter = pyruter.cli.CLI'
+            'pyruter = pyruter.cli:CLI'
         ]
     },
 )
