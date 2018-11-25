@@ -36,8 +36,7 @@ class Departures():
                         destinationname = data['DestinationName']
                         monitored = data['MonitoredCall']
                         time = monitored['ExpectedDepartureTime']
-                        dest_time = time.split('T')[1].split('+')[0][:-3]
-                        departures.append({"time": dest_time,
+                        departures.append({"time": time,
                                            "line": line,
                                            "destination": destinationname})
                 else:
@@ -46,8 +45,7 @@ class Departures():
                     destinationname = data['DestinationName']
                     monitored = data['MonitoredCall']
                     time = monitored['ExpectedDepartureTime']
-                    dest_time = time.split('T')[1].split('+')[0][:-3]
-                    departures.append({"time": dest_time,
+                    departures.append({"time": time,
                                        "line": line,
                                        "destination": destinationname})
             except (TypeError, KeyError, IndexError) as error:
