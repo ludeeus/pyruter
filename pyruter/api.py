@@ -52,6 +52,18 @@ class Departures():
                 LOGGER.error('Error connecting to Ruter, %s', error)
         self._departures = await common.sort_data(departures, 'time')
 
+    async def get_final_destination(self):
+        """Get a list of final destinations for a stop."""
+        from collections import OrderedDict
+        dest = []
+        await self.get_departures()
+        for departure in self._departures:
+            dep = {}
+            dep['line'] = departure.get('line')
+            dep['destination'] = departure.get('destination')
+            dest.append(dep)
+        return list(OrderedDict.fromkeys(dest))
+
     @property
     def departures(self):
         """Return the departures."""
