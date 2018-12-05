@@ -40,7 +40,8 @@ def destinations(stop):
         async with aiohttp.ClientSession() as session:
             data = Departures(LOOP, stop, session=session)
             result = await data.get_final_destination()
-            print(json.dumps(result, indent=4, sort_keys=True))
+            print((json.dumps(result, indent=4, sort_keys=True,
+                   ensure_ascii=False))
     LOOP.run_until_complete(get_destinations())
 
 

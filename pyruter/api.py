@@ -54,7 +54,6 @@ class Departures():
 
     async def get_final_destination(self):
         """Get a list of final destinations for a stop."""
-        from collections import OrderedDict
         dest = []
         await self.get_departures()
         for departure in self._departures:
@@ -62,7 +61,7 @@ class Departures():
             dep['line'] = departure.get('line')
             dep['destination'] = departure.get('destination')
             dest.append(dep)
-        return list(OrderedDict.fromkeys(dest))
+        return [dict(t) for t in {tuple(d.items()) for d in dest}]
 
     @property
     def departures(self):
