@@ -8,7 +8,6 @@ import aiohttp
 @click.group()
 def commands():
     """Click group."""
-    pass
 
 
 @commands.command()
@@ -27,6 +26,7 @@ def departure(stop, destination):
             await data.get_departures()
             print(json.dumps(data.departures, indent=4, sort_keys=True))
     LOOP.run_until_complete(get_departures())
+
 
 @commands.command()
 @click.option('--stop', '-S', type=int, default=None, required=1,
